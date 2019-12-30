@@ -13,11 +13,10 @@ public class OrbitPath {
     }
 
     void render() {
+        context.pushMatrix();
         context.stroke(255, 100);
         context.noFill();
-
-        context.pushMatrix();
-        context.ellipse(0, 0, planet.getMaxDistance()*2, planet.getMinDistance()*2);
+        context.ellipse(0, 0, planet.getDistance()*2, planet.getDistance()*2);
         context.popMatrix();
     }
 }

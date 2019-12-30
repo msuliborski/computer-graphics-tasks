@@ -17,15 +17,14 @@ public class Moon extends AstronomicalObject {
     }
 
     void render() {
-        getContext().fill(190, 189, 179);
-
         setAngle(getAngle() + getAngularVelocity());
-        setX(getContext().cos(getAngle()) * getMinDistance());
-        setY(getContext().sin(getAngle()) * getMaxDistance());
+        setX(getContext().cos(getAngle()) * getDistance());
+        setY(getContext().sin(getAngle()) * getDistance());
 
         getContext().pushMatrix();
-        getContext().translate(planet.getX(), planet.getY());
-        getContext().ellipse(getX(), getY(), getRadius()*2, getRadius()*2);
+        getContext().translate(getX(), getY());
+        getContext().fill(190, 189, 179);
+        getContext().ellipse(0, 0, getRadius()*2, getRadius()*2);
         getContext().popMatrix();
     }
 }

@@ -14,9 +14,6 @@ public class AstronomicalObject {
 
     private float radius;
     private float angle;
-    private float currentDistance;
-    private float minDistance;
-    private float maxDistance;
     private float distance;
     private float angularVelocity;
 
@@ -27,8 +24,6 @@ public class AstronomicalObject {
         this.radius = r;
         this.angle = a;
         this.distance = d;
-        this.minDistance = (float) (d * 0.95);
-        this.maxDistance = (float) (d * 1.05);
         this.color = new PVector(255, 255, 255);
         this.angularVelocity = 0;
     }

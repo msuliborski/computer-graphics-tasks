@@ -9,8 +9,6 @@ import java.util.List;
 @Data
 public class Planet extends AstronomicalObject {
 
-    private float slope;
-
     private Star star;
     private OrbitPath orbitPath;
     private List<Moon> moons = new ArrayList<>();;
@@ -18,10 +16,9 @@ public class Planet extends AstronomicalObject {
     public Planet(PApplet c, Star s, float r, float a, float d) {
         super(c, r, a, d);
         this.star = s;
-        this.slope = 0;
 
         setAngle(getContext().random(0, (float) (2 * Math.PI)));
-        setAngularVelocity((float) (0.01f / Math.sqrt(getDistance())));
+        setAngularVelocity((float) (0.005f));
 
         orbitPath = new OrbitPath(getContext(), this);
     }
@@ -31,18 +28,16 @@ public class Planet extends AstronomicalObject {
     }
 
     void render() {
-        getContext().fill(getColor().x, getColor().y, getColor().z);
-
-        setCurrentDistance((float) Math.sqrt(Math.pow(star.getX() - getX(), 2) + Math.pow(star.getY() - getY(), 2)));
-        setAngle((float) (getAngle() + getAngularVelocity() * Math.pow(getCurrentDistance(), 2) / Math.pow(getMaxDistance(), 2)));
-        setX(getContext().cos(getAngle()) * getMaxDistance());
-        setY(getContext().sin(getAngle()) * getMinDistance());
+        setAngle(getAngle() + getAngularVelocity());
+        setX(getContext().cos(getAngle()) * getDistance());
+        setY(getContext().sin(getAngle()) * getDistance());
 
         getContext().pushMatrix();
-        getContext().translate((float) (star.getX() + Math.sqrt(Math.pow(getMaxDistance(), 2) - Math.pow(getMinDistance(), 2)) * getContext().cos(slope)), (float) (star.getY() + Math.sqrt(Math.pow(getMaxDistance(), 2) - Math.pow(getMinDistance(), 2)) * getContext().sin(slope)));
-        getContext().rotate(slope);
-        getContext().ellipse(getX(), getY(), getRadius() * 2, getRadius() * 2);
+
         orbitPath.render();
+        getContext().translate(getX(), getY());
+        getContext().fill(getColor().x, getColor().y, getColor().z);
+        getContext().ellipse(0, 0, getRadius() * 2, getRadius() * 2);
         for (Moon m : moons)
             m.render();
         getContext().popMatrix();

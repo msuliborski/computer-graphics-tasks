@@ -18,24 +18,20 @@ public class SolarSystem extends PApplet{
 
         Planet mercury = new Planet(this, sun, 4, 0, 60);
         mercury.setColor(new PVector(144, 143, 127));
-        mercury.setSlope(radians(-15));
         sun.addPlanet(mercury);
 
         Planet venus = new Planet(this, sun, 7, 0, 80);
         venus.setColor(new PVector(237, 199, 131));
-        venus.setSlope(radians(-10));
         sun.addPlanet(venus);
 
         Planet earth = new Planet(this, sun, 8, 0, 110);
         earth.setColor(new PVector(139, 158, 127));
-        earth.setSlope(radians(10));
         Moon moon = new Moon(this, earth, 1, 0, 12);
         earth.addMoon(moon);
         sun.addPlanet(earth);
 
         Planet mars = new Planet(this, sun, 5.5f, 0, 140);
         mars.setColor(new PVector(138, 73, 52));
-        venus.setSlope(radians(-10));
         Moon phobos = new Moon(this, mars, 1, 0, 9);
         Moon deimos = new Moon(this, mars, 1, 0, 12);
         mars.addMoon(phobos);
@@ -44,7 +40,6 @@ public class SolarSystem extends PApplet{
 
         Planet jupiter = new Planet(this, sun, 20, 0, 190);
         jupiter.setColor(new PVector(201, 188, 163));
-        jupiter.setSlope(radians(-15));
         Moon io = new Moon(this, jupiter, 1, 0, 28);
         Moon europa = new Moon(this, jupiter, 1, 0, 31);
         Moon ganymede = new Moon(this, jupiter, 1.5f, 0, 34);
@@ -57,7 +52,6 @@ public class SolarSystem extends PApplet{
 
         Planet saturn = new Planet(this, sun, 18, 0, 270);
         saturn.setColor(new PVector(250, 204, 158));
-        saturn.setSlope(radians(5));
         Moon mimas = new Moon(this, saturn, 1, 0, 22);
         Moon enceladus = new Moon(this, saturn, 1, 0, 24);
         Moon tethys = new Moon(this, saturn, 1, 0, 26);
@@ -78,7 +72,6 @@ public class SolarSystem extends PApplet{
 
         Planet uranus = new Planet(this, sun, 13, 0, 330);
         uranus.setColor(new PVector(127, 173, 169));
-        uranus.setSlope(radians(5));
         Moon miranda = new Moon(this, uranus, 1, 0, 18);
         Moon ariel = new Moon(this, uranus, 1, 0, 20);
         Moon umbrel = new Moon(this, uranus, 1, 0, 22);
@@ -94,7 +87,6 @@ public class SolarSystem extends PApplet{
 
         Planet neptune = new Planet(this, sun, 13, 0, 380);
         neptune.setColor(new PVector(65, 117, 169));
-        neptune.setSlope(radians(-5));
         Moon triton = new Moon(this, neptune, 1, 0, 18);
         neptune.addMoon(triton);
         sun.addPlanet(neptune);
