@@ -4,11 +4,17 @@ import com.suliborski.solarsystem.model.Moon;
 import com.suliborski.solarsystem.model.Planet;
 import com.suliborski.solarsystem.model.Star;
 import processing.core.PApplet;
+import processing.core.PShape;
 import processing.core.PVector;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class SolarSystem extends PApplet{
 
     private Star sun;
+    private Planet sedna;
 
     public void settings(){
         size(1200, 800, P3D);
@@ -68,6 +74,7 @@ public class SolarSystem extends PApplet{
         saturn.addMoon(titan);
         saturn.addMoon(hyperion);
         saturn.addMoon(iapetus);
+        saturn.setSpecular(true);
         sun.addPlanet(saturn);
 
         Planet uranus = new Planet(this, sun, 13, 0, 330);
@@ -90,11 +97,21 @@ public class SolarSystem extends PApplet{
         Moon triton = new Moon(this, neptune, 1, 0, 18);
         neptune.addMoon(triton);
         sun.addPlanet(neptune);
+
+        sedna = new Planet(this, sun, 8, 0, 420);
+        sedna.setColor(new PVector(238, 34, 12));
+        sedna.setOrbitSlope(PI/3);
+        sedna.setOrbitSpeed(0.1f);
+        sun.addPlanet(sedna);
     }
 
     public void draw(){
         background(0);
-        lights();
+        sedna.setShape(loadShape("src/main/resources/asteroid.obj"));
+        camera(30, mouseY, 220, // eyeX, eyeY, eyeZ
+                0, 0, 0, // centerX, centerY, centerZ
+                0, 1, 0); // upX, upY, upZ
+//        lights();
         sun.render();
     }
 

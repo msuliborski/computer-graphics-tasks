@@ -2,6 +2,7 @@ package com.suliborski.solarsystem.model;
 
 import lombok.Data;
 import processing.core.PApplet;
+import processing.core.PShape;
 import processing.core.PVector;
 
 @Data
@@ -13,18 +14,29 @@ public class AstronomicalObject {
     private float y;
 
     private float radius;
-    private float angle;
-    private float distance;
-    private float angularVelocity;
+    private float orbitInstantAngle;
+    private float orbitDistance;
+    private float orbitSpeed;
+    private float orbitSlope;
+    private float rotationInstantAngle;
+    private float rotationSpeed;
+    private float rotationSlope;
 
+    private PShape shape;
+    private boolean isSpecular = false;
     private PVector color;
 
     AstronomicalObject(PApplet c, float r, float a, float d) {
         this.context = c;
         this.radius = r;
-        this.angle = a;
-        this.distance = d;
+        this.orbitInstantAngle = a;
+        this.orbitDistance = d;
+        this.orbitSpeed = 0;
+        this.orbitSlope = 0;
+        this.rotationInstantAngle = 0;
+        this.rotationSpeed = 0;
+        this.rotationSlope = 0;
+
         this.color = new PVector(255, 255, 255);
-        this.angularVelocity = 0;
     }
 }
