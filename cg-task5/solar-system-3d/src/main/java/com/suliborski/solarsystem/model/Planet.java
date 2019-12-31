@@ -18,7 +18,7 @@ public class Planet extends AstronomicalObject {
         this.star = s;
 
         setAngle(getContext().random(0, (float) (2 * Math.PI)));
-        setAngularVelocity((float) (0.005f));
+        setAngularVelocity((float) (0.05f / Math.sqrt(getDistance())));
 
         orbitPath = new OrbitPath(getContext(), this);
     }
@@ -33,11 +33,10 @@ public class Planet extends AstronomicalObject {
         setY(getContext().sin(getAngle()) * getDistance());
 
         getContext().pushMatrix();
-
         orbitPath.render();
         getContext().translate(getX(), getY());
         getContext().fill(getColor().x, getColor().y, getColor().z);
-        getContext().ellipse(0, 0, getRadius() * 2, getRadius() * 2);
+        getContext().sphere(getRadius());
         for (Moon m : moons)
             m.render();
         getContext().popMatrix();

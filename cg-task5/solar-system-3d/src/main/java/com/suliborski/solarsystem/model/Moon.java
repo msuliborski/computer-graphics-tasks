@@ -12,7 +12,7 @@ public class Moon extends AstronomicalObject {
         super(c, r, a, d);
         this.planet = p;
 
-        setAngularVelocity((float) (1f / Math.sqrt(getDistance())));
+        setAngularVelocity((float) (0.5f / Math.sqrt(getDistance())));
         setAngle(getContext().random(0, (float) (2 * Math.PI)));
     }
 
@@ -24,7 +24,7 @@ public class Moon extends AstronomicalObject {
         getContext().pushMatrix();
         getContext().translate(getX(), getY());
         getContext().fill(190, 189, 179);
-        getContext().ellipse(0, 0, getRadius()*2, getRadius()*2);
+        getContext().sphere(getRadius());
         getContext().popMatrix();
     }
 }

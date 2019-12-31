@@ -11,7 +11,7 @@ public class Star extends AstronomicalObject {
 
     public Star(PApplet c, float r, float a, float d) {
         super(c, r, a, d);
-        setX(getContext().width/2  - 200);
+        setX(getContext().width/2);
         setY(getContext().height/2);
         planets = new ArrayList<>();
     }
@@ -21,10 +21,10 @@ public class Star extends AstronomicalObject {
     }
 
     public void render() {
-        getContext().fill(getColor().x, getColor().y, getColor().z);
-
         getContext().pushMatrix();
-        getContext().ellipse(getX(), getY(), getRadius()*2, getRadius()*2);
+        getContext().fill(getColor().x, getColor().y, getColor().z);
+        getContext().translate(getX(), getY());
+        getContext().sphere(getRadius());
         for (Planet p : planets)
             p.render();
         getContext().popMatrix();
