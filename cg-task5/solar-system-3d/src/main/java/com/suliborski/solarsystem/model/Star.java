@@ -34,19 +34,19 @@ public class Star extends AstronomicalObject {
         getContext().translate(getX(), getY());
         for (Planet p : planets)
             p.render();
-//        getContext().noStroke();
-        getContext().emissive(255, 255, 0);
-        getContext().pointLight(255, 255, 255, 0, 0, 0);
+        getContext().fill(getColor().x, getColor().y, getColor().z);
+        getContext().noStroke();
+//        getContext().noFill();
+//        getContext().emissive(140);
+//        getContext().ambientLight(40, 40, 40);
+//        getContext().pointLight(255, 255, 255, 0, 0, 0);
+//        getContext().directionalLight(150, 150, 150, 1, 0, 1);
+
         getContext().rotateY((getRotationSlope()));
         getContext().rotate(getRotationInstantAngle());
 
-//        getContext().fill(getColor().x, getColor().y, getColor().z);
-//        getContext().stroke(255, 30);
-//        getContext().pointLight(255, 255, 255, 0, 0, 0); //for the normal behaviour of the sun light
-//        getContext().lightFalloff(0, 0, 0.01f); //light falls off right behind the surface of the sun
-//        getContext().ambientLight(255, 255, 255, 100, 0, 0); //ambientLight in the center of the sun
-
         getContext().sphere(getRadius());
+
 //        getContext().spotLight(253, 184, 19, 100, 0, 0, 1, 1, 1, (float) (PI), 0.5f);
         getContext().popMatrix();
     }

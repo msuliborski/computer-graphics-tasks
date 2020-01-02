@@ -2,11 +2,13 @@ package com.suliborski.solarsystem.model;
 
 import lombok.Data;
 import processing.core.PApplet;
+import processing.core.PShape;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.*;
+import static processing.core.PConstants.SPHERE;
 
 @Data
 public class Planet extends AstronomicalObject {
@@ -47,16 +49,34 @@ public class Planet extends AstronomicalObject {
             m.render();
         getContext().rotateY((getRotationSlope()));
         getContext().rotate(getRotationInstantAngle());
-//        if (isSpecular()) {
         getContext().noStroke();
-        getContext().shininess(1.0f);
+        getContext().fill(255, 255, 255);
+        getContext().specular(getColor().x, getColor().y, getColor().z);
+        getContext().emissive(0);
+
+//        if (isSpecular()) {
+//        getContext().noStroke();
+//        getContext().shininess(1.0f);
 //            getContext().specular(255, 255, 255);
 //        } else {
 //            getContext().fill(getColor().x, getColor().y, getColor().z);
 //            getContext().stroke(255, 30);
 //        }
-        if (getShape() == null) getContext().sphere(getRadius());
-        else {getShape().scale(0.005f); getContext().shape(getShape(), 0, 0);}
+
+
+        if (getImage() != null) {
+            PShape s = getContext().createShape(SPHERE, getRadius());
+            s.setTexture(getImage());
+            getContext().shape(s, 0, 0);
+        } else if (getShape() != null) {
+            getShape().scale(0.005f);
+            getContext().shape(getShape(), 0, 0);
+        } else {
+            getContext().noStroke();
+            getContext().fill(255, 255, 255);
+            getContext().sphere(getRadius());
+        }
+
         getContext().popMatrix();
     }
 }

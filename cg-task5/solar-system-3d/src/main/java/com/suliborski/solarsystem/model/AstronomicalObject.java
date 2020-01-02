@@ -2,6 +2,7 @@ package com.suliborski.solarsystem.model;
 
 import lombok.Data;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PShape;
 import processing.core.PVector;
 
@@ -23,6 +24,7 @@ public class AstronomicalObject {
     private float rotationSlope;
 
     private PShape shape;
+    private PImage image;
     private boolean isSpecular = false;
     private PVector color;
 

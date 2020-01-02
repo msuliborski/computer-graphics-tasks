@@ -14,7 +14,7 @@ import java.nio.file.Files;
 public class SolarSystem extends PApplet{
 
     private Star sun;
-    private Planet sedna;
+    private Planet earth, sedna;
 
     public void settings(){
         size(1200, 800, P3D);
@@ -30,7 +30,7 @@ public class SolarSystem extends PApplet{
         venus.setColor(new PVector(237, 199, 131));
         sun.addPlanet(venus);
 
-        Planet earth = new Planet(this, sun, 8, 0, 110);
+        earth = new Planet(this, sun, 8, 0, 110);
         earth.setColor(new PVector(139, 158, 127));
         Moon moon = new Moon(this, earth, 1, 0, 12);
         earth.addMoon(moon);
@@ -107,11 +107,11 @@ public class SolarSystem extends PApplet{
 
     public void draw(){
         background(0);
+        earth.setImage(loadImage("src/main/resources/earth.jpeg"));
         sedna.setShape(loadShape("src/main/resources/asteroid.obj"));
-        camera(30, mouseY, 220, // eyeX, eyeY, eyeZ
+        camera(30, mouseY, mouseX, // eyeX, eyeY, eyeZ
                 0, 0, 0, // centerX, centerY, centerZ
                 0, 1, 0); // upX, upY, upZ
-//        lights();
         sun.render();
     }
 
