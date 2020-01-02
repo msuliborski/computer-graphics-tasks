@@ -47,14 +47,14 @@ public class Planet extends AstronomicalObject {
             m.render();
         getContext().rotateY((getRotationSlope()));
         getContext().rotate(getRotationInstantAngle());
-        if (isSpecular()) {
-//            getContext().specular(getColor().x, getColor().y, getColor().z);
-            getContext().specular(255, 255, 255555);
-            getContext().noStroke();
-        } else {
-            getContext().fill(getColor().x, getColor().y, getColor().z);
-            getContext().stroke(255, 30);
-        }
+//        if (isSpecular()) {
+        getContext().noStroke();
+        getContext().shininess(1.0f);
+//            getContext().specular(255, 255, 255);
+//        } else {
+//            getContext().fill(getColor().x, getColor().y, getColor().z);
+//            getContext().stroke(255, 30);
+//        }
         if (getShape() == null) getContext().sphere(getRadius());
         else {getShape().scale(0.005f); getContext().shape(getShape(), 0, 0);}
         getContext().popMatrix();
