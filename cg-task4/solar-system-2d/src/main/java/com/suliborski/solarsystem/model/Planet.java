@@ -18,7 +18,7 @@ public class Planet extends AstronomicalObject {
         this.star = s;
 
         setAngle(getContext().random(0, (float) (2 * Math.PI)));
-        setAngularVelocity((float) (0.05f / Math.sqrt(getDistance())));
+        setAngularVelocity((float) (3f / getDistance()));
 
         orbitPath = new OrbitPath(getContext(), this);
     }

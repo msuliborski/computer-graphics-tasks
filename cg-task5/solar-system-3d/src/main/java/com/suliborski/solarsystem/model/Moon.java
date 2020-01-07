@@ -29,7 +29,7 @@ public class Moon extends AstronomicalObject {
         getContext().rotateY(getOrbitSlope());
         getContext().translate(getX(), getY());
         getContext().fill(190, 189, 179);
-        getContext().stroke(255, 30);
+        getContext().noStroke();
         getContext().box(getRadius());
         getContext().popMatrix();
     }

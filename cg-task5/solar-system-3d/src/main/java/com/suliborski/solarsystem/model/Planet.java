@@ -21,10 +21,10 @@ public class Planet extends AstronomicalObject {
         super(c, r, a, d);
         this.star = s;
 
-        setOrbitSpeed((float) (0.05f / sqrt(getOrbitDistance()))); //speed of the planet
+        setOrbitSpeed((float) (0.8f / getOrbitDistance())); //speed of the planet
         setOrbitSlope(getContext().random((float)(-PI/16), (float)(PI/16))); //slope of orbit
         setOrbitInstantAngle(getContext().random(0, (float) (2 * PI))); // start position of a planet
-        setRotationSpeed(0.03f); // how fast it spins
+        setRotationSpeed(0.5f); // how fast it spins
         setRotationSlope(getContext().random((float)(-PI), (float)(PI))); //rotation slope
 
         orbitPath = new OrbitPath(getContext(), this);
@@ -42,40 +42,26 @@ public class Planet extends AstronomicalObject {
         setRotationInstantAngle(getRotationInstantAngle() + getRotationSpeed());
 
         getContext().pushMatrix();
+
+
+
         getContext().rotateY(getOrbitSlope());
+
         orbitPath.render();
+
         getContext().translate(getX(), getY());
         for (Moon m : moons)
             m.render();
+        if (getOrbitDistance() == 110) getContext().directionalLight(255, 255, 255, 0, -1, 0);
+        if (getOrbitDistance() == 190) getContext().spotLight(255, 255, 255, 0, 0, 0, 0, 0, 0, (float) (2*PI), 1000);
+
         getContext().rotateY((getRotationSlope()));
         getContext().rotate(getRotationInstantAngle());
-        getContext().noStroke();
-        getContext().fill(255, 255, 255);
+
         getContext().specular(getColor().x, getColor().y, getColor().z);
         getContext().emissive(0);
 
-//        if (isSpecular()) {
-//        getContext().noStroke();
-//        getContext().shininess(1.0f);
-//            getContext().specular(255, 255, 255);
-//        } else {
-//            getContext().fill(getColor().x, getColor().y, getColor().z);
-//            getContext().stroke(255, 30);
-//        }
-
-
-        if (getImage() != null) {
-            PShape s = getContext().createShape(SPHERE, getRadius());
-            s.setTexture(getImage());
-            getContext().shape(s, 0, 0);
-        } else if (getShape() != null) {
-            getShape().scale(0.005f);
-            getContext().shape(getShape(), 0, 0);
-        } else {
-            getContext().noStroke();
-            getContext().fill(255, 255, 255);
-            getContext().sphere(getRadius());
-        }
+        this.setShapeAndColour();
 
         getContext().popMatrix();
     }
