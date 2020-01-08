@@ -42,30 +42,27 @@ public class AstronomicalObject {
         this.rotationSlope = 0;
 
         this.color = new PVector(255, 255, 255);
+
     }
 
-    protected void setShapeAndColour(){
-        if (isSpecular){
-            getContext().noStroke();
-            getContext().fill(getColor().x, getColor().y, getColor().z);
-            getContext().specular(getColor().x, getColor().y, getColor().z);
-            getContext().sphere(getRadius());
-        } else if (getShape() != null) {
-            getShape().scale(0.005f);
-            getShape().setTexture(getImage());
-            getContext().noStroke();
-            getContext().noFill();
-            getContext().shape(getShape(), 0, 0);
-        } else if (getImage() != null) {
-            getContext().noStroke();
-            getContext().noFill();
-            PShape s = getContext().createShape(SPHERE, getRadius());
-            s.setTexture(getImage());
-            getContext().shape(s, 0, 0);
-        } else {
-            getContext().noStroke();
-            getContext().fill(getColor().x, getColor().y, getColor().z);
-            getContext().sphere(getRadius());
+    public void setup(){
+        if (getShape() == null) {
+            context.beginShape();
+            context.noStroke();
+            PShape s = context.createShape(SPHERE, getRadius());
+
+            setShape(s);
+            context.endShape();
         }
+
+        if (getImage() != null) {
+            getShape().setTexture(getImage());
+        }
+    }
+
+    protected void setColor(){
+        getContext().noStroke();
+        getContext().fill(getColor().x, getColor().y, getColor().z);
+        if (isSpecular) getContext().specular(getColor().x, getColor().y, getColor().z);
     }
 }

@@ -4,6 +4,7 @@ import com.suliborski.solarsystem.model.Moon;
 import com.suliborski.solarsystem.model.Planet;
 import com.suliborski.solarsystem.model.Star;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PShape;
 import processing.core.PVector;
 
@@ -15,6 +16,8 @@ public class SolarSystem extends PApplet{
 
     private Star sun;
     private Planet mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, sedna;
+
+    PImage background;
 
     public void settings(){
         size(1200, 800, P3D);
@@ -71,7 +74,6 @@ public class SolarSystem extends PApplet{
         uranus.addMoon(new Moon(this, uranus, 1, 0, 26));
         sun.addPlanet(uranus);
 
-
         neptune = new Planet(this, sun, 13, 0, 380);
         neptune.setColor(new PVector(65, 117, 169));
         neptune.addMoon(new Moon(this, neptune, 1, 0, 18));
@@ -84,8 +86,9 @@ public class SolarSystem extends PApplet{
         sun.addPlanet(sedna);
     }
 
-    public void draw(){
-        background(loadImage("src/main/resources/milky_way.png"));
+    public void setup(){
+        background = loadImage("src/main/resources/milky_way.png");
+        sun.setImage(loadImage("src/main/resources/sun.png"));
         mercury.setImage(loadImage("src/main/resources/mercury.png"));
         venus.setImage(loadImage("src/main/resources/venus.png"));
         earth.setImage(loadImage("src/main/resources/earth.png"));
@@ -93,8 +96,26 @@ public class SolarSystem extends PApplet{
         jupiter.setImage(loadImage("src/main/resources/jupiter.png"));
         saturn.setImage(loadImage("src/main/resources/saturn.png"));
         uranus.setImage(loadImage("src/main/resources/uranus.png"));
-        sedna.setShape(loadShape("src/main/resources/asteroid.obj"));
+        neptune.setImage(loadImage("src/main/resources/neptune.png"));
+        PShape asteroid = loadShape("src/main/resources/asteroid.obj");
+        asteroid.scale(0.005f);
+        sedna.setShape(asteroid);
         sedna.setImage(loadImage("src/main/resources/asteroid.png"));
+
+        sun.setup();
+        mercury.setup();
+        venus.setup();
+        earth.setup();
+        mars.setup();
+        jupiter.setup();
+        saturn.setup();
+        uranus.setup();
+        neptune.setup();
+        sedna.setup();
+    }
+
+    public void draw(){
+        background(background);
         camera(30, mouseY, mouseX, // eyeX, eyeY, eyeZ
                 0, 0, 0, // centerX, centerY, centerZ
                 0, 1, 0); // upX, upY, upZ

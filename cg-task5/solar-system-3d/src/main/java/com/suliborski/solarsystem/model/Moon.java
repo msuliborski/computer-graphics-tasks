@@ -27,9 +27,10 @@ public class Moon extends AstronomicalObject {
 
         getContext().pushMatrix();
         getContext().rotateY(getOrbitSlope());
+
+        if (getOrbitDistance() == 12) getContext().spotLight(255, 0, 0, 0, 0, 0, -1, 0 , 0, (float) (PI/4), 2);
         getContext().translate(getX(), getY());
-        getContext().fill(190, 189, 179);
-        getContext().noStroke();
+        setColor();
         getContext().box(getRadius());
         getContext().popMatrix();
     }
