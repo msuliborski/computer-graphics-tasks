@@ -1,0 +1,6 @@
+Exercise 4 - 2D transformations and animation
+Write a program in Processing that draws and animates planetary system containing:
+• one star,
+• at least 4 planets,
+• at least 7 moons orbiting around at least 3 of the planets.
+Each of the celestial bodies should have a different size, color, orbit and speed.

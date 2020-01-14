@@ -1,0 +1,2 @@
+Exercise 6 - interaction and navigation
+Extend your program from the previous exercise by adding a simple spaceship (constructed of primitives) that you can move in 3D space using the keyboard. Implement the ability to change the field of view with the mouse.

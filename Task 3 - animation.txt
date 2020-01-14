@@ -1,0 +1,8 @@
+Exercise 3 - animation
+Create simple 2D animation based on the vector map made in the second task. The animation should illustrate the route from one place of the map to the destination point. The finished project should include animations using keyframing techniques, masking, shape animations, path animation.
+
+Technical requirements:
+Animation time: 20 ~ 30s
+Playback speed: 25 fps
+Minimum resolution: 1280x720 px
+Format: mp4 / h.264

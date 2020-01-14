@@ -1,0 +1,10 @@
+Exercise 5 - 3D geometry, materials and lighting
+Modify your program from the previous exercise in order to create animated 3D planetary system containing: 
+• one star,
+• at least 4 planets,
+• at least 7 moons orbiting around at least 3 of the planets.
+Each of the celestial bodies should be a sphere, a box or a custom geometry loaded from the obj file format (each of the three possibilities should occur) and should have a different color (including specular) or be textured (both versions should appear). The orbit, the angle of the rotation axis and the speed should be diversified.
+Three types of light in the scene should be created:
+• point light from a star (with the emissive material)
+• directional light,
+• spotlight from one of the planets, shining vertically from the surface.
