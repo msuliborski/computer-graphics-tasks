@@ -2,8 +2,6 @@ package com.suliborski.solarsystem.model;
 
 import lombok.Data;
 import processing.core.PApplet;
-import processing.core.PConstants;
-import processing.core.PShape;
 
 
 @Data
@@ -15,9 +13,9 @@ public class Spaceship {
     private float y;
     private float z;
 
-    private int movingX;
-    private int movingY;
-    private int movingZ;
+    private int directionX;
+    private int directionY;
+    private int directionZ;
 
     private int size;
     private int speed;
@@ -34,9 +32,9 @@ public class Spaceship {
 
     public void render() {
 
-        x += movingX * speed;
-        y += movingY * speed;
-        z += movingZ * speed;
+        x += directionX * speed;
+        y += directionY * speed;
+        z += directionZ * speed;
 
         getContext().pushMatrix();
 

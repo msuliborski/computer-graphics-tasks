@@ -10,10 +10,6 @@ import processing.core.PShape;
 import processing.core.PVector;
 import processing.event.MouseEvent;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
 public class SolarSystem extends PApplet{
 
     private Star sun;
@@ -133,12 +129,12 @@ public class SolarSystem extends PApplet{
     public void keyPressed() {
         if (key == CODED) {
             switch (keyCode) {
-                case RIGHT:     spaceship.setMovingX(1); break;
-                case LEFT:      spaceship.setMovingX(-1); break;
-                case UP:        spaceship.setMovingY(-1); break;
-                case DOWN:      spaceship.setMovingY(1); break;
-                case SHIFT:     spaceship.setMovingZ(1); break;
-                case ALT:       spaceship.setMovingZ(-1); break;
+                case RIGHT:     spaceship.setDirectionX(1); break;
+                case LEFT:      spaceship.setDirectionX(-1); break;
+                case UP:        spaceship.setDirectionY(-1); break;
+                case DOWN:      spaceship.setDirectionY(1); break;
+                case SHIFT:     spaceship.setDirectionZ(1); break;
+                case ALT:       spaceship.setDirectionZ(-1); break;
             }
         }
     }
@@ -148,13 +144,13 @@ public class SolarSystem extends PApplet{
             switch (keyCode) {
                 case RIGHT:
                 case LEFT:
-                    spaceship.setMovingX(0); break;
+                    spaceship.setDirectionX(0); break;
                 case UP:
                 case DOWN:
-                    spaceship.setMovingY(0); break;
+                    spaceship.setDirectionY(0); break;
                 case SHIFT:
                 case ALT:
-                    spaceship.setMovingZ(0); break;
+                    spaceship.setDirectionZ(0); break;
             }
         }
     }
