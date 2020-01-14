@@ -5,9 +5,6 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.sqrt;
-import static java.lang.StrictMath.PI;
-
 public class Star extends AstronomicalObject {
 
     private List<Planet> planets;
@@ -42,12 +39,11 @@ public class Star extends AstronomicalObject {
         getContext().rotateY((getRotationSlope()));
         getContext().rotate(getRotationInstantAngle());
 
-        this.setShapeAndColour();
-
-        getContext().noStroke();
+        this.setColor();
         getContext().fill(getColor().x, getColor().y, getColor().z);
         getContext().emissive(getColor().x, getColor().y, getColor().z);
-        getContext().sphere(getRadius());
+        getContext().noStroke();
+        getContext().shape(getShape(), 0, 0);
 
         getContext().popMatrix();
     }

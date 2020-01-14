@@ -40,6 +40,7 @@ public class Star extends AstronomicalObject {
         getContext().rotate(getRotationInstantAngle());
 
         this.setColor();
+        getContext().fill(getColor().x, getColor().y, getColor().z);
         getContext().emissive(getColor().x, getColor().y, getColor().z);
         getContext().noStroke();
         getContext().shape(getShape(), 0, 0);

@@ -2,13 +2,11 @@ package com.suliborski.solarsystem.model;
 
 import lombok.Data;
 import processing.core.PApplet;
-import processing.core.PShape;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.*;
-import static processing.core.PConstants.SPHERE;
 
 @Data
 public class Planet extends AstronomicalObject {
@@ -52,16 +50,17 @@ public class Planet extends AstronomicalObject {
         getContext().translate(getX(), getY());
         for (Moon m : moons)
             m.render();
-        if (getOrbitDistance() == 110) getContext().directionalLight(255, 255, 255, 0, -1, 0);
-        if (getOrbitDistance() == 190) getContext().spotLight(255, 255, 255, 0, 0, 0, 0, 0, 0, (float) (2*PI), 1000);
+
+        if (getOrbitDistance() == 110)  getContext().directionalLight(0, 0, 255, 0, -1, 0);
 
         getContext().rotateY((getRotationSlope()));
         getContext().rotate(getRotationInstantAngle());
 
-        getContext().specular(getColor().x, getColor().y, getColor().z);
         getContext().emissive(0);
 
-        this.setShapeAndColour();
+        this.setColor();
+
+        getContext().shape(getShape(), 0, 0);
 
         getContext().popMatrix();
     }

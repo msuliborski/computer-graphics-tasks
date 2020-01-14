@@ -5,8 +5,10 @@ import com.suliborski.solarsystem.model.Planet;
 import com.suliborski.solarsystem.model.Spaceship;
 import com.suliborski.solarsystem.model.Star;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PShape;
 import processing.core.PVector;
+import processing.event.MouseEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,15 +16,15 @@ import java.nio.file.Files;
 
 public class SolarSystem extends PApplet{
 
-    Spaceship spaceship;
-
     private Star sun;
     private Planet mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, sedna;
+    Spaceship spaceship;
+    PImage background;
+
+    int fov = 100;
 
     public void settings(){
         size(1200, 800, P3D);
-
-        spaceship = new Spaceship(this, 0, 0, 0, 20);
 
         sun = new Star(this, 25, 0, 0);
         sun.setColor(new PVector(245, 236, 111));
@@ -76,7 +78,6 @@ public class SolarSystem extends PApplet{
         uranus.addMoon(new Moon(this, uranus, 1, 0, 26));
         sun.addPlanet(uranus);
 
-
         neptune = new Planet(this, sun, 13, 0, 380);
         neptune.setColor(new PVector(65, 117, 169));
         neptune.addMoon(new Moon(this, neptune, 1, 0, 18));
@@ -87,10 +88,13 @@ public class SolarSystem extends PApplet{
         sedna.setOrbitSlope(PI/3);
         sedna.setOrbitSpeed(0.1f);
         sun.addPlanet(sedna);
+
+        spaceship = new Spaceship(this, 100, 0, 0, 20);
     }
 
-    public void draw(){
-        background(loadImage("src/main/resources/milky_way.png"));
+    public void setup(){
+        background = loadImage("src/main/resources/milky_way.png");
+        sun.setImage(loadImage("src/main/resources/sun.png"));
         mercury.setImage(loadImage("src/main/resources/mercury.png"));
         venus.setImage(loadImage("src/main/resources/venus.png"));
         earth.setImage(loadImage("src/main/resources/earth.png"));
@@ -98,21 +102,66 @@ public class SolarSystem extends PApplet{
         jupiter.setImage(loadImage("src/main/resources/jupiter.png"));
         saturn.setImage(loadImage("src/main/resources/saturn.png"));
         uranus.setImage(loadImage("src/main/resources/uranus.png"));
-        sedna.setShape(loadShape("src/main/resources/asteroid.obj"));
+        neptune.setImage(loadImage("src/main/resources/neptune.png"));
+        PShape asteroid = loadShape("src/main/resources/asteroid.obj");
+        asteroid.scale(0.005f);
+        sedna.setShape(asteroid);
         sedna.setImage(loadImage("src/main/resources/asteroid.png"));
+
+        sun.setup();
+        mercury.setup();
+        venus.setup();
+        earth.setup();
+        mars.setup();
+        jupiter.setup();
+        saturn.setup();
+        uranus.setup();
+        neptune.setup();
+        sedna.setup();
+
+    }
+
+    public void draw(){
+        background(background);
+        camera(30, mouseY, mouseX,0, 0, 0,0, 1, 0);
+        perspective(radians(fov), 1.5f,2, 2000);
         sun.render();
+
         spaceship.render();
-        camera(spaceship.getX(), spaceship.getY() + 30, spaceship.getZ(), // eyeX, eyeY, eyeZ
-                -30, 0, 0, // centerX, centerY, centerZ
-                1, 0, 0); // upX, upY, upZ
     }
 
     public void keyPressed() {
-        if (key == 'W' || key == 'w') {
-            spaceship.setX(spaceship.getX() + 10);
-        } else if (key == 'S' || key == 's') {
-            spaceship.setX(spaceship.getX() - 10);
+        if (key == CODED) {
+            switch (keyCode) {
+                case RIGHT:     spaceship.setMovingX(1); break;
+                case LEFT:      spaceship.setMovingX(-1); break;
+                case UP:        spaceship.setMovingY(-1); break;
+                case DOWN:      spaceship.setMovingY(1); break;
+                case SHIFT:     spaceship.setMovingZ(1); break;
+                case ALT:       spaceship.setMovingZ(-1); break;
+            }
         }
+    }
+
+    public void keyReleased() {
+        if (key == CODED) {
+            switch (keyCode) {
+                case RIGHT:
+                case LEFT:
+                    spaceship.setMovingX(0); break;
+                case UP:
+                case DOWN:
+                    spaceship.setMovingY(0); break;
+                case SHIFT:
+                case ALT:
+                    spaceship.setMovingZ(0); break;
+            }
+        }
+    }
+
+    public void mouseWheel(MouseEvent event) {
+        if (fov + event.getCount() >= 30 && fov + event.getCount() <= 160)
+            fov += event.getCount();
     }
 
     public static void main(String[] args){
