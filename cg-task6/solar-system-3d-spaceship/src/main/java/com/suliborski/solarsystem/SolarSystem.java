@@ -129,28 +129,10 @@ public class SolarSystem extends PApplet{
     public void keyPressed() {
         if (key == CODED) {
             switch (keyCode) {
-                case RIGHT:     spaceship.setDirectionX(1); break;
-                case LEFT:      spaceship.setDirectionX(-1); break;
-                case UP:        spaceship.setDirectionY(-1); break;
-                case DOWN:      spaceship.setDirectionY(1); break;
-                case SHIFT:     spaceship.setDirectionZ(1); break;
-                case ALT:       spaceship.setDirectionZ(-1); break;
-            }
-        }
-    }
-
-    public void keyReleased() {
-        if (key == CODED) {
-            switch (keyCode) {
-                case RIGHT:
-                case LEFT:
-                    spaceship.setDirectionX(0); break;
-                case UP:
-                case DOWN:
-                    spaceship.setDirectionY(0); break;
-                case SHIFT:
-                case ALT:
-                    spaceship.setDirectionZ(0); break;
+                case RIGHT:     spaceship.right(); break;
+                case LEFT:      spaceship.left(); break;
+                case UP:        spaceship.forward(); break;
+                case DOWN:      spaceship.back(); break;
             }
         }
     }
