@@ -125,14 +125,31 @@ public class SolarSystem extends PApplet{
 
         spaceship.render();
     }
-
     public void keyPressed() {
         if (key == CODED) {
             switch (keyCode) {
-                case RIGHT:     spaceship.right(); break;
-                case LEFT:      spaceship.left(); break;
-                case UP:        spaceship.forward(); break;
-                case DOWN:      spaceship.back(); break;
+                case UP:    spaceship.setMovingForward(1); break;
+                case DOWN:  spaceship.setMovingForward(-1); break;
+                case RIGHT: spaceship.setRotatingZ(1); break;
+                case LEFT:  spaceship.setRotatingZ(-1); break;
+                case SHIFT: spaceship.setMovingUp(1); break;
+                case ALT:   spaceship.setMovingUp(-1); break;
+            }
+        }
+    }
+
+    public void keyReleased() {
+        if (key == CODED) {
+            switch (keyCode) {
+                case UP:
+                case DOWN:
+                    spaceship.setMovingForward(0); break;
+                case RIGHT:
+                case LEFT:
+                    spaceship.setRotatingZ(0); break;
+                case SHIFT:
+                case ALT:
+                    spaceship.setMovingUp(0); break;
             }
         }
     }
